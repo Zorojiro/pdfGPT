@@ -7,3 +7,4 @@ langchain_google_genai
 google-generativeai
 langchain-groq
 langchain-community
+pydantic
