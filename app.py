@@ -35,6 +35,17 @@ def text_to_chunks(raw_text):
     chunks = text_splitter.split_text(raw_text)
     return chunks
 
+import logging
+
+def get_vectorstore(chunks):
+    try:
+        embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+        vectorstore = FAISS.from_texts(chunks, embeddings)
+        return vectorstore
+    except Exception as e:
+        logging.error("An error occurred while creating the vectorstore: %s", str(e))
+        raise
+
 def get_vectorstore(chunks):
     embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
     vectorstore = FAISS.from_texts(texts=chunks, embedding=embeddings)
